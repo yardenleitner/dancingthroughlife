@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Reshef Labs 2027</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,900;1,500;1,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#f6f2f8; --surface:#ffffff; --surface-2:#ece4f0; --line:#ddd0e4;
+  --ink:#1f1726; --muted:#6f6380;
+  --gold:#b9791f; --teal:#2f7a58; --rose:#c13f58;
+  --f-disp:"Fraunces",Georgia,serif;
+  --f-body:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#140f1a; --surface:#1d1726; --surface-2:#2a2135; --line:#3a2f47;
+    --ink:#f3eef7; --muted:#a99cb8;
+    --gold:#e3a23c; --teal:#4f9d7a; --rose:#e2677e;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#140f1a; --surface:#1d1726; --surface-2:#2a2135; --line:#3a2f47;
+  --ink:#f3eef7; --muted:#a99cb8;
+  --gold:#e3a23c; --teal:#4f9d7a; --rose:#e2677e;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f-body)}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--c);outline-offset:3px}
+.wrap{max-width:640px;margin-inline:auto;padding:28px 20px 56px}
+.mono{font-family:var(--f-mono)}
+
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:640px;margin-inline:auto;padding:20px 20px 0}
+.wordmark{font:600 13px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.wordmark b{color:var(--ink)}
+.yr{font:500 12px var(--f-mono);color:var(--muted);letter-spacing:.08em}
+
+.back{display:inline-flex;align-items:center;gap:6px;font:500 12px var(--f-mono);color:var(--muted);letter-spacing:.06em}
+.pager{display:flex;gap:16px;margin-top:18px;flex-wrap:wrap}
+.pager span,.pager a{font:500 12px var(--f-mono);letter-spacing:.06em;color:var(--muted);padding-bottom:2px;border-bottom:2px solid transparent}
+.pager span.on{color:var(--ink);border-color:var(--c)}
+
+.squig{display:block;width:72px;height:14px;margin:14px 0}
+.squig path{fill:none;stroke:var(--c);stroke-width:2.5;stroke-linecap:round}
+
+.tag{display:inline-flex;align-items:center;gap:8px;font:600 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin-top:18px}
+.title2{margin:10px 0 0;font:600 clamp(34px,9.5vw,52px)/1.08 var(--f-disp);color:var(--ink);text-wrap:balance}
+.blurb{margin-top:18px;display:grid;gap:12px;color:var(--muted);font-size:15.5px;max-width:34em}
+.blurb strong{color:var(--ink);font-weight:600}
+
+.mantra{margin:28px 0 0;padding:18px 20px;border-radius:12px;background:var(--surface-2);border-inline-start:3px solid var(--c)}
+.mantra span{display:block;font:600 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin-bottom:8px}
+.mantra p{margin:0;font-style:italic;font-weight:500;font-size:17px;line-height:1.5;font-family:var(--f-disp);color:var(--ink)}
+
+.listhead{margin-top:34px;font:600 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.goals{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:0}
+.goals li{display:flex;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.goals .n{flex:none;font:600 20px var(--f-mono);color:var(--c);min-width:2.2em;font-variant-numeric:tabular-nums}
+.goals .d{display:grid;gap:3px}
+.goals .d b{font:600 15px/1.35 var(--f-body);color:var(--ink)}
+.goals .d i{font-style:normal;font-size:12.5px;color:var(--muted)}
+
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line)}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+<a class="wordmark" href="index.html"><b>Dancing</b> Through Life</a>
+<span class="yr mono">2027</span>
+</header>
+
+<div class="wrap" style="--c:var(--gold)">
+<a class="back" href="index.html">&larr; Dancing Through Life</a>
+<nav class="pager mono" aria-label="Goals">
+<span class="on">Reshef</span><a href="454.html">454</a><a href="personal-growth.html">Personal Growth</a>
+</nav>
+
+<p class="tag">Reshef Labs &middot; From Services to Product</p>
+<h2 class="title2">Build a Product Customers Return To</h2>
+<svg class="squig" viewBox="0 0 72 14" aria-hidden="true"><path d="M1 7 Q10 1 19 7 T37 7 T55 7 T71 7"/></svg>
+
+<div class="blurb">
+<p>I will help turn Reshef Labs from an AI services company into a company with a repeatable product that solves a valuable problem. Our first proof point is <strong>Debora for investment advisors</strong>: a system that identifies and analyzes deals, then surfaces relevant options and insights.</p>
+<p>The wider vision is an AI research expert that can continuously study a domain, deliver useful ideas, and help an organization act. Over time, customers should be able to create their own customized Deboras.</p>
+</div>
+
+<blockquote class="mantra"><span>Mantra</span><p>I will earn the right to build a platform by first proving that one product solves a problem customers care enough to pay for, and continue paying for.</p></blockquote>
+
+<p class="listhead mono">This year</p>
+<ul class="goals">
+<li><span class="n mono">2</span><span class="d"><b>Prove Debora delivers value and earns payment</b><i>Value delivered in one domain &rarr; a customer willing to pay</i></span></li>
+<li><span class="n mono">2</span><span class="d"><b>Build a reusable product foundation</b><i>Reusable core built &rarr; second customer served without a rebuild</i></span></li>
+<li><span class="n mono">2</span><span class="d"><b>Customization, led by real demand</b><i>Learn what customers truly need &rarr; enable it where demand is real</i></span></li>
+<li><span class="n mono">1</span><span class="d"><b>Stay focused on customer value, product quality, and repeatable delivery</b><i>Boring and repeatable beats exciting and once.</i></span></li>
+</ul>
+
+<footer><a class="back" href="index.html">&larr; Back to Dancing Through Life</a></footer>
+</div>
+
+</body>
+</html>
