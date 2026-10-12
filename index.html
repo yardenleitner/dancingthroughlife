@@ -64,9 +64,46 @@ footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line)}
 footer p{margin:0;font-size:13px;color:var(--muted);max-width:36em}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+#gate{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px}
+.gate-card{max-width:320px;width:100%;text-align:center}
+.gate-card .gate-eyebrow{font:600 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.gate-card h2{margin:0 0 18px;font:600 28px var(--f-disp);color:var(--ink)}
+.gate-card input{width:100%;min-height:46px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:0 14px;font:500 15px var(--f-body);color:var(--ink);margin-bottom:10px}
+.gate-card input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.gate-card button{width:100%;min-height:46px;border:0;border-radius:8px;background:var(--gold);color:#fff;font:600 15px var(--f-body);cursor:pointer}
+.gate-err{margin:10px 0 0;font-size:13px;color:var(--rose)}
 </style>
 </head>
 <body>
+
+<div id="gate">
+  <form id="gate-form" class="gate-card">
+    <p class="gate-eyebrow mono">PRIVATE</p>
+    <h2>Enter password</h2>
+    <input type="password" id="gate-input" placeholder="Password" autocomplete="off" autofocus>
+    <button type="submit">Unlock</button>
+    <p class="gate-err mono" id="gate-err" hidden>Incorrect password &mdash; try again.</p>
+  </form>
+</div>
+<script>
+(function(){
+  var KEY="dtl_unlocked_v1", PW="greeniseverywhere";
+  var gate=document.getElementById("gate");
+  try{ if(localStorage.getItem(KEY)==="1"){ gate.style.display="none" } }catch(e){}
+  document.getElementById("gate-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    var input=document.getElementById("gate-input");
+    if(input.value===PW){
+      try{ localStorage.setItem(KEY,"1") }catch(e){}
+      gate.style.display="none";
+    } else {
+      document.getElementById("gate-err").hidden=false;
+      input.value=""; input.focus();
+    }
+  });
+})();
+</script>
 
 <header class="top">
 <span class="wordmark"><b>Dancing</b> Through Life</span>
