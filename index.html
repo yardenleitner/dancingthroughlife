@@ -4,86 +4,125 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Dancing Through Life</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,900;1,500;1,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@700&display=swap">
 <style>
 :root{
-  --bg:#f6f2f8; --surface:#ffffff; --surface-2:#ece4f0; --line:#ddd0e4;
-  --ink:#1f1726; --muted:#6f6380;
-  --gold:#b9791f; --teal:#2f7a58; --rose:#c13f58;
-  --f-disp:"Fraunces",Georgia,serif;
-  --f-body:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
-  color-scheme:light;
+  --void:#0a0e16; --surface:#11161f; --surface-2:#161c28; --line:#232b3d;
+  --ink:#eef1f6; --haze:#8d97ab; --danger:#ff6b6b;
+  --cyan:#45cfe0; --green:#5fd98a; --amber:#ffb648;
+  --f-disp:"IBM Plex Sans Condensed",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --f-sign:"Caveat",cursive;
+  color-scheme:dark;
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#140f1a; --surface:#1d1726; --surface-2:#2a2135; --line:#3a2f47;
-    --ink:#f3eef7; --muted:#a99cb8;
-    --gold:#e3a23c; --teal:#4f9d7a; --rose:#e2677e;
-    color-scheme:dark;
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --void:#f3f5f8; --surface:#ffffff; --surface-2:#e8edf4; --line:#d7dee8;
+    --ink:#0d1420; --haze:#57617a; --danger:#b3261e;
+    --cyan:#0a7f93; --green:#1f8a3c; --amber:#b5720a;
+    color-scheme:light;
   }
 }
+:root[data-theme="light"]{
+  --void:#f3f5f8; --surface:#ffffff; --surface-2:#e8edf4; --line:#d7dee8;
+  --ink:#0d1420; --haze:#57617a; --danger:#b3261e;
+  --cyan:#0a7f93; --green:#1f8a3c; --amber:#b5720a;
+  color-scheme:light;
+}
 :root[data-theme="dark"]{
-  --bg:#140f1a; --surface:#1d1726; --surface-2:#2a2135; --line:#3a2f47;
-  --ink:#f3eef7; --muted:#a99cb8;
-  --gold:#e3a23c; --teal:#4f9d7a; --rose:#e2677e;
+  --void:#0a0e16; --surface:#11161f; --surface-2:#161c28; --line:#232b3d;
+  --ink:#eef1f6; --haze:#8d97ab; --danger:#ff6b6b;
+  --cyan:#45cfe0; --green:#5fd98a; --amber:#ffb648;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f-body)}
+body{margin:0;background:var(--void);color:var(--ink);font:400 16px/1.6 var(--f-body)}
+.grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:40px 40px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 50% at 50% 0%,#000 25%,transparent 75%);
+  mask-image:radial-gradient(ellipse 70% 50% at 50% 0%,#000 25%,transparent 75%)}
 a{color:inherit;text-decoration:none}
-a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.wrap{max-width:640px;margin-inline:auto;padding:28px 20px 56px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{position:relative;z-index:1;max-width:680px;margin-inline:auto;padding:26px 22px 64px}
 .mono{font-family:var(--f-mono)}
 
-header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:640px;margin-inline:auto;padding:20px 20px 0}
-.wordmark{font:600 13px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.wordmark b{color:var(--ink)}
-.yr{font:500 12px var(--f-mono);color:var(--muted);letter-spacing:.08em}
+header.top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;max-width:680px;margin-inline:auto;padding:22px 22px 0;font:500 13px var(--f-body);color:var(--haze)}
+header.top a{color:var(--ink)}
 
-.squig{display:block;width:72px;height:14px;margin:14px 0}
-.squig path{fill:none;stroke:var(--c);stroke-width:2.5;stroke-linecap:round}
+.status{display:inline-flex;align-items:center;gap:8px;margin:0;font:500 13px var(--f-body);color:var(--haze)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 color-mix(in srgb, var(--green) 55%, transparent);animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--green) 55%, transparent)}100%{box-shadow:0 0 0 8px transparent}}
 
-.eyebrow{font:600 12px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0}
-h1{margin:10px 0 0;font:600 clamp(40px,11vw,64px)/1.05 var(--f-disp);letter-spacing:-.01em;text-wrap:balance;color:var(--ink)}
-h1 em{font-style:italic;font-weight:500}
-.lede{margin:16px 0 0;font-size:17px;color:var(--muted);max-width:32ch;text-wrap:pretty}
-.dates{margin:18px 0 0;font:500 13px var(--f-mono);color:var(--muted);letter-spacing:.04em}
+h1{margin:18px 0 0;font:700 clamp(38px,10vw,58px)/1.08 var(--f-disp);letter-spacing:.005em;text-wrap:balance;color:var(--ink)}
+h1 .signal,h2 .signal{color:var(--amber);text-shadow:0 0 22px color-mix(in srgb, var(--amber) 50%, transparent)}
+
+.spectrum{height:3px;width:120px;margin:18px 0 0;border-radius:2px;background:linear-gradient(90deg,var(--cyan),var(--green),var(--amber))}
+
+.tagline{margin:18px 0 0;font-size:17px;color:var(--haze);max-width:36ch}
+.dates{margin:16px 0 0;font:500 14px var(--f-mono);color:var(--haze)}
 .dates b{color:var(--ink);font-weight:600}
 
-.cards{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:12px}
-.card{border:1px solid var(--line);background:var(--surface);border-radius:14px;position:relative;overflow:hidden}
-.card::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:4px;background:var(--c)}
-.card>a{display:block;padding:18px 22px 18px 26px}
-.card .k{font:600 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--c)}
-.card h2{margin:6px 0 0;font:600 24px/1.2 var(--f-disp);color:var(--ink)}
-.card p{margin:6px 0 0;font-size:14px;color:var(--muted);max-width:40ch}
-.card .go{margin-top:10px;display:inline-flex;align-items:center;gap:6px;font:600 12px var(--f-mono);color:var(--c);letter-spacing:.06em}
+.block{margin-top:52px}
+.block h2{margin:0;font:700 clamp(26px,6vw,36px)/1.22 var(--f-disp);color:var(--ink);max-width:22ch}
+.block>p{margin:14px 0 0;color:var(--haze);max-width:58ch;font-size:15.5px}
 
-footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line)}
-footer p{margin:0;font-size:13px;color:var(--muted);max-width:36em}
+.cards{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:14px}
+.card{position:relative;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
+.card[data-c="cyan"]{--c:var(--cyan)}
+.card[data-c="green"]{--c:var(--green)}
+.card[data-c="amber"]{--c:var(--amber)}
+.card::before{content:"";position:absolute;inset-block:14px;inset-inline-start:0;width:3px;background:var(--c)}
+.card>a{display:block;padding:16px 20px 16px 26px}
+.card .dom{font:600 12.5px var(--f-body);color:var(--c)}
+.card h3{margin:5px 0 0;font:700 22px var(--f-disp);color:var(--ink)}
+.card p{margin:6px 0 0;font-size:14px;color:var(--haze);max-width:46ch}
+
+.cells{display:grid;gap:10px;margin-top:18px}
+@media (min-width:560px){.cells{grid-template-columns:1fr 1fr}}
+.cell{border:1px solid var(--line);border-radius:4px;padding:16px 18px;background:var(--surface)}
+.cell b{display:block;font:600 14px var(--f-body);color:var(--ink)}
+.cell span{display:block;margin-top:6px;font-size:13.5px;color:var(--haze)}
+
+.term{margin-top:16px;border:1px solid var(--line);border-radius:4px;background:var(--surface-2);padding:16px 18px;overflow-x:auto}
+.term .cap{margin:0 0 8px;font:500 12px var(--f-mono);color:var(--haze)}
+.term pre{margin:0;font:400 13px/1.7 var(--f-mono);color:var(--ink)}
+.term .k{color:var(--cyan)}
+.term .f{color:var(--green)}
+.term .c{color:var(--haze)}
+
+.closing{margin-top:52px;padding-top:28px;border-top:1px solid var(--line)}
+.closing h2{margin:0;font:700 clamp(26px,6.5vw,38px)/1.22 var(--f-disp);color:var(--ink);max-width:22ch}
+.closing p{margin:14px 0 0;color:var(--haze);max-width:58ch;font-size:15.5px}
+.sign{margin-top:22px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.sign b{font:700 34px var(--f-sign);color:var(--ink)}
+.sign span{font:500 12px var(--f-mono);color:var(--haze)}
+
+footer.site{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font:500 12px var(--f-body);color:var(--haze)}
+
+#gate{position:fixed;inset:0;z-index:999;background:var(--void);display:flex;align-items:center;justify-content:center;padding:24px}
+.gate-card{max-width:320px;width:100%}
+.gate-card h2{margin:0 0 10px;font:700 26px var(--f-disp);color:var(--ink)}
+.gate-card .hint{margin:0 0 16px;color:var(--haze);font-size:14px}
+.gate-card input{width:100%;min-height:46px;border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:0 14px;font:500 15px var(--f-body);color:var(--ink);margin-bottom:10px}
+.gate-card button{width:100%;min-height:46px;border:1px solid var(--ink);border-radius:4px;background:var(--ink);color:var(--void);font:600 15px var(--f-body);cursor:pointer}
+.gate-err{margin:10px 0 0;font-size:13px;color:var(--danger)}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-
-#gate{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px}
-.gate-card{max-width:320px;width:100%;text-align:center}
-.gate-card .gate-eyebrow{font:600 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
-.gate-card h2{margin:0 0 18px;font:600 28px var(--f-disp);color:var(--ink)}
-.gate-card input{width:100%;min-height:46px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:0 14px;font:500 15px var(--f-body);color:var(--ink);margin-bottom:10px}
-.gate-card input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.gate-card button{width:100%;min-height:46px;border:0;border-radius:8px;background:var(--gold);color:#fff;font:600 15px var(--f-body);cursor:pointer}
-.gate-err{margin:10px 0 0;font-size:13px;color:var(--rose)}
 </style>
 </head>
 <body>
 
+<div class="grid" aria-hidden="true"></div>
+
 <div id="gate">
   <form id="gate-form" class="gate-card">
-    <p class="gate-eyebrow mono">PRIVATE</p>
-    <h2>Enter password</h2>
+    <h2>Enter the password</h2>
+    <p class="hint">This vision board is private.</p>
     <input type="password" id="gate-input" placeholder="Password" autocomplete="off" autofocus>
     <button type="submit">Unlock</button>
-    <p class="gate-err mono" id="gate-err" hidden>Incorrect password &mdash; try again.</p>
+    <p class="gate-err" id="gate-err" hidden>Incorrect password &mdash; try again.</p>
   </form>
 </div>
 <script>
@@ -106,41 +145,74 @@ footer p{margin:0;font-size:13px;color:var(--muted);max-width:36em}
 </script>
 
 <header class="top">
-<span class="wordmark"><b>Dancing</b> Through Life</span>
-<span class="yr mono">2027</span>
+<span>Dancing Through Life</span>
+<span class="mono">2027</span>
 </header>
 
 <div class="wrap">
-<p class="eyebrow mono">YARDEN LEITNER &middot; STRATEGY</p>
-<h1>Dancing <em>Through</em> Life</h1>
-<svg class="squig" viewBox="0 0 72 14" aria-hidden="true" style="--c:var(--gold)"><path d="M1 7 Q10 1 19 7 T37 7 T55 7 T71 7"/></svg>
-<p class="lede">Three commitments carried through one year &mdash; not one after another, but in rhythm, the way a dancer holds several lines of a piece at once.</p>
-<p class="dates mono"><b>Oct 11, 2026</b> &rarr; <b>Oct 10, 2027</b></p>
+<p class="status"><span class="dot"></span>Legend in progress</p>
+
+<h1>The Making of a <span class="signal">Legend</span></h1>
+<div class="spectrum"></div>
+<p class="tagline">A year to lead myself, build what matters, and become the person my ambitions demand.</p>
+<p class="dates mono"><b>Oct 11, 2026</b> &mdash; <b>Oct 10, 2027</b></p>
+
+<div class="block">
+<h2>This year, I will become the leader of my own life.</h2>
+<p>I will lead myself with the vision, courage, discipline, and care I want to bring to the people and organizations I lead. I will choose how I interpret my circumstances, where I direct my attention, and who I become through my actions.</p>
+<p>My ambition is not only to achieve more. It is to live more fully: to do meaningful work, build things that matter, strengthen my body and spirit, create, connect, take risks, and enjoy the life I am building.</p>
+</div>
 
 <ul class="cards">
-<li class="card" style="--c:var(--gold)"><a href="reshef.html">
-<span class="k mono">01 &middot; Reshef Labs</span>
-<h2>Build a Product Customers Return To</h2>
-<p>Turning Reshef Labs from a services shop into a product people pay to keep.</p>
-<span class="go">Open the page &rarr;</span>
+<li class="card" data-c="cyan"><a href="reshef.html">
+<span class="dom">Reshef Labs</span>
+<h3>Build a Product Customers Return To</h3>
+<p>An AI services company becoming one with a product people pay to keep &mdash; proof point: Debora.</p>
 </a></li>
 
-<li class="card" style="--c:var(--teal)"><a href="454.html">
-<span class="k mono">02 &middot; Medor 454</span>
-<h2>Make 454 a Model of Excellence</h2>
-<p>Making the unit a standard other units borrow from.</p>
-<span class="go">Open the page &rarr;</span>
+<li class="card" data-c="green"><a href="454.html">
+<span class="dom">Medor 454</span>
+<h3>Make 454 a Model of Excellence</h3>
+<p>A unit known for achievements, standards, and people who inspire others.</p>
 </a></li>
 
-<li class="card" style="--c:var(--rose)"><a href="personal-growth.html">
-<span class="k mono">03 &middot; Personal</span>
-<h2>Lead My Own Life</h2>
-<p>Building a life I don&rsquo;t need an achievement to enjoy.</p>
-<span class="go">Open the page &rarr;</span>
+<li class="card" data-c="amber"><a href="personal-growth.html">
+<span class="dom">Personal Growth</span>
+<h3>Lead My Own Life</h3>
+<p>Ambition, adventure, music, faith, friendship, love, and joy &mdash; not postponed.</p>
 </a></li>
 </ul>
 
-<footer><p>I will lead myself. I will set a high standard. I will bring people with me. I will build things that matter. And I will remember to enjoy the life I am working so hard to create.</p></footer>
+<div class="block">
+<h2>My Operating Rhythm</h2>
+<p>This is how I turn ambition into a weekly practice.</p>
+<div class="cells">
+<div class="cell"><b>Every week</b><span>Choose the most important actions across life, military leadership, and Reshef Labs. Review progress.</span></div>
+<div class="cell"><b>Every month</b><span>Measure progress, recognize what works, and reset priorities where needed.</span></div>
+<div class="cell"><b>Every quarter</b><span>Ask whether my actions create real results, develop people, and make life more alive.</span></div>
+<div class="cell"><b>When I fall short</b><span>Tell the truth, learn quickly, and return to the work without abandoning the vision.</span></div>
+</div>
+<div class="term">
+<p class="cap">when_i_fall_short.js</p>
+<pre><span class="k">if</span> (fellShort) {
+  <span class="f">tellTheTruth</span>();
+  <span class="f">learnFast</span>();
+  <span class="f">returnToWork</span>();  <span class="c">// vision stays</span>
+}</pre>
+</div>
+</div>
+
+<div class="closing">
+<h2>I will become the person <span class="signal">my vision requires</span>.</h2>
+<p>I will lead myself. I will set a high standard. I will bring people with me. I will build things that matter. And I will remember to enjoy the life I am working so hard to create.</p>
+<p>On October 10, 2027, I want to look back and see a year in which my ambition became visible in my habits, my leadership, my work, my relationships, and my joy.</p>
+<div class="sign">
+<b>Yarden Leitner</b>
+<span class="mono">Signed Oct 11, 2026</span>
+</div>
+</div>
+
+<footer class="site">Dancing Through Life &mdash; a 2027 strategy.</footer>
 </div>
 
 </body>
